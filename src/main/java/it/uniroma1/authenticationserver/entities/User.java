@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "user")
+@Table(name = "application_users")
 public class User implements UserDetails{
 
     @Id
@@ -48,7 +48,7 @@ public class User implements UserDetails{
     private String surname;
 
     @Column(nullable = false)
-    private Boolean enabled = true;
+    private Boolean enabled;
     
     @ManyToMany
     @JoinTable(
@@ -57,5 +57,10 @@ public class User implements UserDetails{
         inverseJoinColumns = {@JoinColumn(name = "role_id")}
     )
     private Set<Role> authorities;
+
+    @Override
+    public boolean isEnabled() {
+        return this.enabled;
+    }
     
 }
