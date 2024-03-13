@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: easy01$
+      MYSQL_DATABASE: users
+      MYSQL_USER: user_admin
+      MYSQL_PASSWORD: user_admin01$
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+      - ./my.cnf:/etc/mysql/my.cnf
+
+  # spring-app:
+  #   image: authentication-server:latest
+  #   container_name: authentication-server-container
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  #   depends_on:
+  #     - mysql  # Ensures that the 'spring-app' service starts after 'mysql' service
+  #   environment:
+  #     SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/users
+  #     SPRING_DATASOURCE_USERNAME: user_admin
+  #     SPRING_DATASOURCE_PASSWORD: user_admin01$
+
+volumes:
+  mysql-data:
