@@ -102,7 +102,7 @@ public class JwtUtil {
                 .claims(claims)
                 .subject(subject)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 2)) // 2 minutes validation
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 60 minutes validation
                 .signWith(key).compact();
     }
 
